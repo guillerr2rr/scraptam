@@ -26,11 +26,11 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="order: ${orders}" class="text-center">
-                    <td th:text="${order.id}"></td>
-                    <td th:text="${order.creationDate}"></td>
+                <tr th:each="pedido: ${pedidos}" class="text-center">
+                    <td th:text="${pedido.id}"></td>
+                    <td th:text="${pedido.creationDate}"></td>
                     <td>
-                        <a class="btn btn-success" th:href="@{/orders/{id}(id=${order.id})}">View</a>
+                        <a class="btn btn-success" th:href="@{/pedidos/{id}(id=${pedido.id})}">View</a>
                     </td>
 
 

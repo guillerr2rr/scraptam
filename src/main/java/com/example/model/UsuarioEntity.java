@@ -11,7 +11,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "users")
-public class UserEntity implements UserDetails {
+public class UsuarioEntity implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,10 +29,10 @@ public class UserEntity implements UserDetails {
     @Enumerated(EnumType.STRING)
     private List<UserAuthority> authorities = new ArrayList<>();
 
-    public UserEntity() {
+    public UsuarioEntity() {
     }
 
-    public UserEntity(String username, String password, String email, List<UserAuthority> authorities) {
+    public UsuarioEntity(String username, String password, String email, List<UserAuthority> authorities) {
         this.username = username;
         this.password = password;
         this.email = email;

@@ -1,12 +1,12 @@
 package com.example.repository;
 
-import com.example.model.Product;
+import com.example.model.Producto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 @Repository
-public interface ProductRepository extends JpaRepository<Product, Long> {
+public interface ProductoRepository extends JpaRepository<Producto, Long> {
 
-    List<Product> findAllByOrderId(Long id);
+    List<Producto> findAllByPedidoId(Long id);
 }

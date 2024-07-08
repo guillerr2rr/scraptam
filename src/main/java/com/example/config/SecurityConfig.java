@@ -25,14 +25,14 @@ public class SecurityConfig {
                         .requestMatchers("/js/**").permitAll()
                         .requestMatchers("/files/**").permitAll()
                         .requestMatchers("/webjars/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/products/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/productos/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin()
-                .defaultSuccessUrl("/products", true)
+                .defaultSuccessUrl("/productos", true)
                 .and()
                 .logout()
-                .logoutSuccessUrl("/products");
+                .logoutSuccessUrl("/productos");
 
         return http.build();
     }

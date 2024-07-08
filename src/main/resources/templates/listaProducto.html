@@ -5,7 +5,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Product List</title>
+    <title>producto List</title>
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
 </head>
 <body>
@@ -19,7 +19,7 @@
 
             <a sec:authorize="hasAuthority('ADMIN')"
                class="btn btn-info"
-               th:href="@{/products/new}">Create new product</a>
+               th:href="@{/productos/new}">Create new producto</a>
 
             <table class="table table-striped table-responsive-md">
                 <thead>
@@ -32,25 +32,26 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="product: ${products}" class="text-center">
+                <tr th:each="producto: ${productos}" class="text-center">
                     <th>
-                        <img th:src="${#strings.isEmpty(product.image)}
+                        <img th:src="${#strings.isEmpty(producto.imagen)}
                         ? 'https://dummyimage.com/640x360/fff/aaa'
-                        : ${product.image}"
+                        : ${producto.imagen}"
                         class="img-fluid align-content-center" alt="Image">
 
                     </th>
-                    <td th:text="${product.name}"></td>
-                    <td th:text="${#numbers.formatCurrency(product.price)}"></td>
+                    <td th:text="${producto.nombre}"></td>
+                    <td th:text="${#numbers.formatCurrency(producto.precio)}"></td>
+
                     <td>
-                        <span th:if="${product.order == null}" class="text-success">Available</span>
-                        <span th:if="${product.order != null}" class="text-danger">Unavailable</span>
+                        <span th:if="${producto.pedido == null}" class="text-success">Available</span>
+                        <span th:if="${producto.pedido != null}" class="text-danger">Unavailable</span>
                     </td>
                     <td>
                         <a class="btn btn-success"
                            sec:authorize="isAuthenticated()"
-                           th:if="${product.order == null}"
-                           th:href="@{/shopcart/add/{id}(id=${product.id})}">Buy</a>
+                           th:if="${producto.pedido == null}"
+                           th:href="@{/carrito/add/{id}(id=${producto.id})}">Buy</a>
                     </td>
 
 

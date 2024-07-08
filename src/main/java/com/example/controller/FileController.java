@@ -15,10 +15,10 @@ public class FileController {
     @Autowired
     private StorageService storageService;
 
-    @GetMapping("/files/{filename:.+}")
+    @GetMapping("/files/{filenombre:.+}")
     @ResponseBody
-    public ResponseEntity<Resource> serveFile(@PathVariable String filename){
-        Resource file = storageService.loadAsResource(filename);
+    public ResponseEntity<Resource> serveFile(@PathVariable String filenombre){
+        Resource file = storageService.loadAsResource(filenombre);
         return ResponseEntity.ok().body(file);
     }
 }

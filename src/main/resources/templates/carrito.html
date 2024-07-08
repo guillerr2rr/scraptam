@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+</head>
+<body>
+<div th:replace="~{fragments :: navbar}"></div>
+
+<div class="container text-center mt-5">
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+            <div>
+                <strong>Quantity</strong>: <span th:text="${productos.size()}"></span>.
+                <strong>Total</strong>: <span th:text="${carrito_total}"></span>
+            </div>
+            <div>
+                <a class="btn btn-info" th:href="@{/carrito/checkout}">Checkout</a>
+            </div>
+            <table class="table table-striped table-responsive-md">
+                <thead>
+                <tr>
+                    <th scope="col">Image</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="producto : ${productos}" class="text-center">
+                    <td>
+                        <img th:src="${#strings.isEmpty(producto.imagen) ? 'https://dummyimage.com/640x360/fff/aaa' : producto.imagen}"
+                             class="img-fluid align-content-center" alt="Image" style="height: 300px;">
+                    </td>
+                    <td th:text="${producto.nombre}"></td>
+                    <td th:text="${#numbers.formatCurrency(producto.precio)}"></td>
+                    <td>
+                        <a class="btn btn-danger" sec:authorize="isAuthenticated()" th:href="@{/carrito/remove/{id}(id=${producto.id})}">Remove from cart</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-2"></div>
+    </div>
+</div>
+
+<div th:replace="~{fragments :: footer}"></div>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</body>
+</html>

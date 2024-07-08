@@ -3,10 +3,11 @@ package com.example.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Entity
-@Table(name = "orders")
-public class Order {
+@Table(name = "pedidos")
+public class Pedido {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,12 +16,12 @@ public class Order {
     private LocalDateTime creationDate;
 
     @ManyToOne
-    private UserEntity user;
+    private UsuarioEntity user;
 
-    public Order() {
+    public Pedido() {
     }
 
-    public Order(LocalDateTime creationDate, UserEntity user) {
+    public Pedido(LocalDateTime creationDate, UsuarioEntity user) {
         this.creationDate = creationDate;
         this.user = user;
     }
@@ -41,17 +42,30 @@ public class Order {
         this.creationDate = creationDate;
     }
 
-    public UserEntity getUser() {
+    public UsuarioEntity getUser() {
         return user;
     }
 
-    public void setUser(UserEntity user) {
+    public void setUser(UsuarioEntity user) {
         this.user = user;
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Pedido pedido = (Pedido) o;
+        return Objects.equals(id, pedido.id) && Objects.equals(creationDate, pedido.creationDate) && Objects.equals(user, pedido.user);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, creationDate, user);
+    }
+
+    @Override
     public String toString() {
-        return "Order{" +
+        return "Pedido{" +
                 "id=" + id +
                 ", creationDate=" + creationDate +
                 '}';

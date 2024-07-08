@@ -1,7 +1,7 @@
 package com.example.controller;
 
-import com.example.model.Product;
-import com.example.repository.ProductRepository;
+import com.example.model.Producto;
+import com.example.repository.ProductoRepository;
 import com.example.service.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,41 +14,41 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
 @Controller
-public class ProductController {
+public class ProductoController {
 
     @Autowired
-    private ProductRepository productRepo;
+    private ProductoRepository productRepo;
 
     @Autowired
     private StorageService storageService;
 
-    // http://localhost:8080/products
-    @GetMapping("/products")
+    // http://localhost:8080/productos
+    @GetMapping("/productos")
     public String findAll(Model model){
-        model.addAttribute("products", productRepo.findAll());
-        return "product_list";
+        model.addAttribute("productos", productRepo.findAll());
+        return "listaProducto";
     }
-    @PostMapping("/products")
+    @PostMapping("/productos")
     public String submit(
-            @ModelAttribute Product product,
+            @ModelAttribute Producto product,
             @RequestParam("file") MultipartFile file
     ){
         if(!file.isEmpty()){
-            String image = storageService.store(file);
-            String imageUrl = MvcUriComponentsBuilder.
+            String imagen = storageService.store(file);
+            String imagenUrl = MvcUriComponentsBuilder.
                     fromMethodName(
-                            FileController.class, "serveFile", image
+                            FileController.class, "serveFile", imagen
                     ).build().toUriString();
-            product.setImage(imageUrl);
+            product.setImagen(imagenUrl);
         }
         productRepo.save(product);
-        return "redirect:/products";
+        return "redirect:/productos";
     }
 
-    @GetMapping("/products/new")
+    @GetMapping("/productos/new")
     public String create(Model model){
-        model.addAttribute("product", new Product());
-        return "product_form";
+        model.addAttribute("producto", new Producto());
+        return "formularioProducto";
     }
 
 

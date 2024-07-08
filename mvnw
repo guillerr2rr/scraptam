@@ -54,7 +54,7 @@ fi
 cygwin=false;
 darwin=false;
 mingw=false
-case "`uname`" in
+case "`unombre`" in
   CYGWIN*) cygwin=true ;;
   MINGW*) mingw=true;;
   Darwin*) darwin=true
@@ -87,13 +87,13 @@ if [ -z "$M2_HOME" ] ; then
     if expr "$link" : '/.*' > /dev/null; then
       PRG="$link"
     else
-      PRG="`dirname "$PRG"`/$link"
+      PRG="`dirnombre "$PRG"`/$link"
     fi
   done
 
   saveddir=`pwd`
 
-  M2_HOME=`dirname "$PRG"`/..
+  M2_HOME=`dirnombre "$PRG"`/..
 
   # make it fully qualified
   M2_HOME=`cd "$M2_HOME" && pwd`
@@ -127,12 +127,12 @@ if [ -z "$JAVA_HOME" ]; then
     readLink=`which readlink`
     if [ ! `expr "$readLink" : '\([^ ]*\)'` = "no" ]; then
       if $darwin ; then
-        javaHome="`dirname \"$javaExecutable\"`"
+        javaHome="`dirnombre \"$javaExecutable\"`"
         javaExecutable="`cd \"$javaHome\" && pwd -P`/javac"
       else
         javaExecutable="`readlink -f \"$javaExecutable\"`"
       fi
-      javaHome="`dirname \"$javaExecutable\"`"
+      javaHome="`dirnombre \"$javaExecutable\"`"
       javaHome=`expr "$javaHome" : '\(.*\)/bin'`
       JAVA_HOME="$javaHome"
       export JAVA_HOME
